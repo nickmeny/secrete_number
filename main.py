@@ -1,6 +1,12 @@
 
 import random
 
+#it's my first project in python. it's simple to make it but the interface it's very beauty
+
+
+
+
+
 
 
 welcom = r"""
@@ -39,7 +45,7 @@ heart = colored(255,0,0, '♥')
 print(colored(0,0,255,welcom))
 
 def _main_():
-    #let's make interface 
+    #let's make the interface 
     print("*" * 40)
     print('\n')
     print(colored(51,255,153,"What mode do you want to play the secret number?"))
@@ -76,7 +82,7 @@ def _main_():
         _main_()
     
 
-
+#here is the busic def for the game 
 def guess(x,tries,heart):
     number = random.randint(1,x)
     guess = 0
