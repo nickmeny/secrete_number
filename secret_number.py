@@ -1,7 +1,9 @@
 
 import random
 
-#it's my first project in python. it's simple to make it but the interface it's very beauty
+# it's my first project in python. it's simple to make it but the interface it's very beautiful.
+# if it has any bug, please send me an email with this bug. 
+# if you liked this game, please recomende to your friends. if you do this, you will suport me a lot.
 
 
 
