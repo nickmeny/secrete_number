@@ -48,6 +48,7 @@ def _main_():
     #let's make the interface 
     print("*" * 40)
     print('\n')
+    print("*"+colored(51,255,153,"This game made by Nick"))
     print(colored(51,255,153,"What mode do you want to play the secret number?"))
     print(colored(255,255,51,"1)")+ colored(0,255,0,"Easy"))
     print(colored(255,255,51,"2)")+ colored(255, 128, 0,"Normal"))
@@ -157,9 +158,6 @@ def yesno_quit():
         quit()
     if sure2 != "n" or "y":
         print(colored(51,255,153,"You need to input n for no or y for yes"))
-
-
-
 
 
 
