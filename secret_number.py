@@ -1,5 +1,6 @@
 
 import random
+import read_json as read
 
 # it's my first project in python. it's simple to make it but the interface it's very beautiful.
 # if it has any bug, please send me an email with this bug. 
@@ -31,7 +32,8 @@ welcom = r"""
 def colored(r, g, b, text):
     return "\033[38;2;{};{};{}m{} \033[38;2;255;255;255m".format(r, g, b, text)
 
-
+ 
+score = 0
 easy = 10
 normal = 20
 hard = 30
@@ -46,7 +48,9 @@ heart = colored(255,0,0, '♥')
 
 print(colored(0,0,255,welcom))
 
-def _main_():
+def _main_(score):
+
+    read.reader()
     #let's make the interface 
     print("*" * 40)
     print('\n')
@@ -67,29 +71,30 @@ def _main_():
     if mode == '1':
         x = easy
         tries = 5
-        guess(x,tries,heart)
+        guess(x,tries,heart,score)
     if mode == '2':
         x = normal
         tries = 4
-        guess(x,tries,heart)
+        guess(x,tries,heart,score)
     if mode == '3':
         x = hard
         tries = 3
-        guess(x,tries,heart)
+        guess(x,tries,heart,score)
     if mode == "h":
         _help_()
     if mode == "q":
         yesno_quit()
     if mode != "1" or "2" or "3" or "h" or "q":
         print ("You need to write '1' for easy, '2' for normal and '3' for hard")
-        _main_()
+        _main_(score)
     
 
 #here is the busic def for the game 
-def guess(x,tries,heart):
+def guess(x,tries,heart,score):
     number = random.randint(1,x)
     guess = 0
-    while guess != number: 
+    while guess != number:
+        print(number)
         guess = int(input(f'Guess a number between 1 - {x}: '))
         if guess < number :
             print("To low. Guess again!")
@@ -98,7 +103,7 @@ def guess(x,tries,heart):
             while tries <= 0:
                 print(colored(162,12,12,"You lose"))
                 print(f'The number is {number}')
-                yesno()
+                yesno(score)
         elif guess > number:
             print("To high. Guess again!")
             tries  -= 1
@@ -106,24 +111,27 @@ def guess(x,tries,heart):
             while tries <= 0:
                 print(colored(162,12,12,"You lose"))
                 print(colored(153,51,255,f'The number is{colored(255,128,0, number)}'))
-                yesno()
+                yesno(score)
     print(colored(51,251,51,f'Congratulation! You found the hidden number'))
+   
+    score += 1
+    print(score)
     print('\n')
-    yesno()
+    yesno(score)
 
 
 
 
-def yesno():
+def yesno(score):
     yn = input(colored(51,255,153,"Do you want to play again the Secret Number?(y/n)"))
     if yn == "y":
         print (colored(51,255,153,"ok"))
-        _main_()
+        _main_(score)
     if yn == "n":
         sure()
     if yn != "n" or "y":
         print(colored(51,255,153,"You need to input n for no or y for yes"))
-        yesno()
+        yesno(score)
 
 
 def sure():
@@ -133,7 +141,7 @@ def sure():
         print(colored(51,255,153,"Thank you very much"))
         quit()
     if sure1 == "n":
-        yesno()
+        yesno(score)
     if sure1 != "n" or "y":
         print(colored(51,255,153,"You need to input n for no or y for yes"))
         sure()
@@ -148,7 +156,7 @@ def _help_():
     print(colored(51,255,153,"We need to input a guess for a number between 1 - 10 or 1- 20 or 1 - 30. It's a very simple game!"))
     help1 = input(colored(51,255,153,"do you want to go back to the game?(y/n) "))
     if help1 == "y": 
-        _main_()
+        _main_(score)
     if help1 == "n":
         _help_()
 
@@ -165,4 +173,4 @@ def yesno_quit():
 
 
 
-_main_()
+_main_(score)
