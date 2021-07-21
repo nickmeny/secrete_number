@@ -1,6 +1,6 @@
 
 import random
-import read_json as read
+import datacontroller as db
 
 # it's my first project in python. it's simple to make it but the interface it's very beautiful.
 # if it has any bug, please send me an email with this bug. 
@@ -49,8 +49,6 @@ heart = colored(255,0,0, '♥')
 print(colored(0,0,255,welcom))
 
 def _main_(score):
-
-    read.reader()
     #let's make the interface 
     print("*" * 40)
     print('\n')
@@ -90,6 +88,7 @@ def _main_(score):
     
 
 #here is the busic def for the game 
+
 def guess(x,tries,heart,score):
     number = random.randint(1,x)
     guess = 0
@@ -113,9 +112,13 @@ def guess(x,tries,heart,score):
                 print(colored(153,51,255,f'The number is{colored(255,128,0, number)}'))
                 yesno(score)
     print(colored(51,251,51,f'Congratulation! You found the hidden number'))
-   
+    load_score=db.reader()
     score += 1
-    print(score)
+    if load_score > score:
+        load_score += 1
+        db.writer(load_score)
+    if load_score <= score:
+       db.writer(score)
     print('\n')
     yesno(score)
 
