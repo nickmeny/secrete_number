@@ -27,13 +27,14 @@ welcom = r"""
 
 
 
-
 # this is a def for rgb colors in lines
 def colored(r, g, b, text):
     return "\033[38;2;{};{};{}m{} \033[38;2;255;255;255m".format(r, g, b, text)
 
- 
-score = 0
+try:
+    score = db.reader()
+except:
+    db.create()
 easy = 10
 normal = 20
 hard = 30
@@ -112,14 +113,16 @@ def guess(x,tries,heart,score):
                 print(colored(153,51,255,f'The number is{colored(255,128,0, number)}'))
                 yesno(score)
     print(colored(51,251,51,f'Congratulation! You found the hidden number'))
-    load_score=db.reader()
+    load_score = db.reader()
     score += 1
+
     if load_score > score:
         load_score += 1
         db.writer(load_score)
     if load_score <= score:
-       db.writer(score)
+        db.writer(score)
     print('\n')
+
     yesno(score)
 
 
