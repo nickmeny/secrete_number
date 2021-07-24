@@ -1,7 +1,7 @@
 
 import random
 import datacontroller as db
-import time
+
 
 
 
@@ -40,6 +40,7 @@ print(colored(0,0,255,welcom))
 
 try:
  db.reader()
+ print(colored(51,251,51,"DATABASE LOADED SUCCESSFUL"))
 
 except:
  db.create()
@@ -65,7 +66,7 @@ def _main_(score):
     print("*"+colored(51,255,153,"This game made by Nick"))
     print("\n")
     if load_score > 0 :
-        print(f"Your Score is {load_score}")
+        print(colored(124,38,124,f"Your Score is {load_score}"))
     print(colored(51,255,153,"What mode do you want to play the secret number?"))
     print(colored(255,255,51,"1)")+ colored(0,255,0,"Easy"))
     print(colored(255,255,51,"2)")+ colored(255, 128, 0,"Normal"))
@@ -97,7 +98,7 @@ def _main_(score):
         yesno_quit()
     if mode != "1" or "2" or "3" or "h" or "q":
         print ("You need to write '1' for easy, '2' for normal and '3' for hard")
-        _main_(score,load_score)
+        _main_(score)
     
 
 #here is the busic def for the game 
@@ -106,7 +107,6 @@ def guess(x,tries,heart,score,load_score):
     number = random.randint(1,x)
     guess = 0
     while guess != number:
-        print(number)
         guess = int(input(f'Guess a number between 1 - {x}: '))
         if guess < number :
             print("To low. Guess again!")

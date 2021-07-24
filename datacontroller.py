@@ -7,14 +7,16 @@ import json
 #score, users, passwords and more.
 
 
-
+def colored(r, g, b, text):
+    return "\033[38;2;{};{};{}m{} \033[38;2;255;255;255m".format(r, g, b, text)
 
 def create():
   with open("base.json", "w") as f:
     try:
       json.dump(0,f)
+      print(colored(51,251,51,"DATABASE CREATED SUCCESSFUL"))
     except:
-        reader()
+       print(colored(162,12,12,"DATABASE FAILED TO CEATED"))
 
 
 
