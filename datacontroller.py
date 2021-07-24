@@ -10,8 +10,15 @@ import json
 
 
 def create():
-     with open("base.json", "w") as f:
-       json.dump(0,f)
+  with open("base.json", "w") as f:
+    try:
+      json.dump(0,f)
+    except:
+        reader()
+
+
+
+
        
 
 

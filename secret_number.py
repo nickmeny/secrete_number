@@ -1,6 +1,9 @@
 
 import random
 import datacontroller as db
+import time
+
+
 
 # it's my first project in python. it's simple to make it but the interface it's very beautiful.
 # if it has any bug, please send me an email with this bug. 
@@ -31,10 +34,18 @@ welcom = r"""
 def colored(r, g, b, text):
     return "\033[38;2;{};{};{}m{} \033[38;2;255;255;255m".format(r, g, b, text)
 
+print(colored(0,0,255,welcom))
+
+
+
 try:
-    score = db.reader()
+ db.reader()
+
 except:
-    db.create()
+ db.create()
+
+
+score = 0
 easy = 10
 normal = 20
 hard = 30
@@ -44,16 +55,17 @@ tries = None
 #here is the heart symbol (you can put this symbol with Alt + 3 from keypad. For more, visit this link:https://www.alt-codes.net/ )
 heart = colored(255,0,0, '♥')
 
-
-
-
-print(colored(0,0,255,welcom))
-
 def _main_(score):
+
+    load_score = db.reader()
+
     #let's make the interface 
     print("*" * 40)
     print('\n')
     print("*"+colored(51,255,153,"This game made by Nick"))
+    print("\n")
+    if load_score > 0 :
+        print(f"Your Score is {load_score}")
     print(colored(51,255,153,"What mode do you want to play the secret number?"))
     print(colored(255,255,51,"1)")+ colored(0,255,0,"Easy"))
     print(colored(255,255,51,"2)")+ colored(255, 128, 0,"Normal"))
@@ -70,27 +82,27 @@ def _main_(score):
     if mode == '1':
         x = easy
         tries = 5
-        guess(x,tries,heart,score)
+        guess(x,tries,heart,score,load_score)
     if mode == '2':
         x = normal
         tries = 4
-        guess(x,tries,heart,score)
+        guess(x,tries,heart,score,load_score)
     if mode == '3':
         x = hard
         tries = 3
-        guess(x,tries,heart,score)
+        guess(x,tries,heart,score,load_score)
     if mode == "h":
         _help_()
     if mode == "q":
         yesno_quit()
     if mode != "1" or "2" or "3" or "h" or "q":
         print ("You need to write '1' for easy, '2' for normal and '3' for hard")
-        _main_(score)
+        _main_(score,load_score)
     
 
 #here is the busic def for the game 
 
-def guess(x,tries,heart,score):
+def guess(x,tries,heart,score,load_score):
     number = random.randint(1,x)
     guess = 0
     while guess != number:
@@ -113,9 +125,9 @@ def guess(x,tries,heart,score):
                 print(colored(153,51,255,f'The number is{colored(255,128,0, number)}'))
                 yesno(score)
     print(colored(51,251,51,f'Congratulation! You found the hidden number'))
-    load_score = db.reader()
-    score += 1
 
+    score += 1
+    load_score =db.reader()
     if load_score > score:
         load_score += 1
         db.writer(load_score)
